@@ -1,0 +1,2 @@
+import test from 'node:test';import assert from 'node:assert/strict';let profile;try{({profile}=await import('../geometry.mjs'));}catch{}
+test('fixed-window profiles show frequency and actual relative phase without audio-rate flicker',()=>{assert.equal(typeof profile,'function');const state={a:110,b:110.25,gain:.12,slow:.2,relative:.25};assert.notEqual(profile(state,0,.3),profile(state,1,.3));const equal={...state,b:110,relative:0};assert.equal(profile(equal,0,.3),profile(equal,1,.3));assert.equal(profile({...equal,gain:0},0,.4),0);});
